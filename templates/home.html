@@ -1,0 +1,344 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Sentimental Analysis</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
+
+<body>
+    <div id="nav" style="background-color :#000000;">
+        <p>Social Media Sentimental Analysis</p>
+    </div>
+
+    <div id="sli_form">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img class="sli-lan" src="{% static 'sen_c1.png' %}"
+                    style="width:100%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+            </div>
+            <div class="mySlides fade">
+                <img class="sli-lan" src="{%static 'sen_c2.png '  %}" style="width:100%"
+                    style="width:100%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+            </div>
+            <div class="mySlides fade">
+                <img class="sli-lan" src="{%static 'sen_c3.png '  %}" style="width:100%"
+                    style="width:100%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <div class="switch">
+                <div class="twitter" onclick="p1change()" style="color: #ffffff;">Tweets</div>
+                <div class="facebook" onclick="p2change()" style="color: #000000;">FB-Comments</div>
+            </div>
+            <div id="page1" class="tcard">
+                <form id="form" class="tcard_form" method="POST" action="analyze">
+                    <h1 class="tcard_title">Analyze the Tweets</h1>
+                    {% csrf_token %}
+                    <div class="f-input_container">
+                        <input type="text" name="Hashtag" class="f-input" required />
+                        <label id="hash" for="" class="f-label">Enter the Hashtag</label>
+                    </div>
+                    <button type="submit" class="card_button" value="Analyse Tweets">Analyse Tweets</button>
+                </form>
+            </div>
+            <div id="page2" class="tcard" style="display: none;">
+                <form id="form" class="tcard_form" method="POST" action="upload" enctype="multipart/form-data">
+                    <h1 class="tcard_title">Analyze the FB-Comments</h1>
+                    {% csrf_token %}
+                    <div class="c-input_container">
+                        <input type="file" name="csv_file" class="c-input" required />
+                    </div>
+                    <button type="submit" class="card_button" value="Analyse Comments">Analyse Comments</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="div-categ fir-mai">
+        <div class="catg-box ">
+            <img class="catg-img" src="{%static 'search.png'  %}">
+            <h1 class="content-h3 cent curpoi tebold" onclick="location.href='#'">Search</h1>
+            <h1 class="content-p telight">Search for a keywordthat would like to analyse</h1>
+        </div>
+        <div class="catg-box">
+            <img class="catg-img" src="{%static 'analyze (2).png'   %}">
+            <h1 class="content-h3  curpoi tebold" onclick="location.href='#'">Analyse</h1>
+            <h1 class="content-p telight">Tweets will be returned as positive,negative or neutral</h1>
+        </div>
+        <div class="catg-box">
+            <img class="catg-img" src="{%static 'down.png '  %}">
+            <h1 class="content-h3  curpoi tebold" onclick="location.href='#'">Download</h1>
+            <h1 class="content-p telight">Download the loaded CSV</h1>
+        </div>
+    </div>
+    <div class="fir-mai div-quote">
+        <main>
+            <h1 class="content-h3 cblack2 tecenter">A place for Sentiment Analysis</h1>
+            <h1 class="content-h2 cblack2 tecenter tebold">Our goal</h1>
+            <h1 class="content-h3 cblack2 tecenter">In this minor project, we aim to perform sentiment analysis on
+                social media posts related to a specific topic or event. We will use natural language processing
+                techniques to analyze the sentiment of the posts .</h1>
+        </main>
+    </div>
+    <main class="div-margin-bot">
+        <div class="flex-row">
+            <h1 class="dis-inli tebold content-h2">Programming Languages</h1>
+        </div>
+        <div class="div-comp">
+            <div class="comp-box"><img src="{%static 'python.png '   %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'django.png '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'html.jpg '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'css.jpg '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'js.png '   %}" alt=""></div>
+        </div>
+        <br><br>
+        <div class="thi-lin">
+            <div></div>
+        </div>
+        <br><br><br>
+        <div class="flex-row">
+            <h1 class="dis-inli tebold content-h2">Libraries</h1>
+        </div>
+        <div class="div-comp">
+            <div class="comp-box"><img src="{%static 'numpy.png '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'pandas.jpg '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'twint.png '  %}" alt=""></div>
+            <br>
+            <br><br>
+            <br><br>
+            <main class="div-margin-bot">
+                <div class="bcli-white-2">
+                    <div>
+                        <h1 class="bcorange-2 cwhite1 tehv-pad content-h2">Detailed Explanation of Libraries</h1>
+                    </div>
+                    <div class="grp-abt">
+                        <div class="abt-nam">
+                            <img src="{%static 'textblob.png '  %}" alt="">
+                            <h1 class="content-p">Textblob</h1>
+                        </div>
+                        <div class="abt-nam">
+                            <img src="{%static 'nltk.png '  %}" alt="">
+                            <h1 class="content-p">Vader</h1>
+                        </div>
+                        <div class="abt-nam">
+                            <img src="{%static 'flair.png '  %}" alt="">
+                            <h1 class="content-p">Flair</h1>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="abt-deta">
+                            <h1 class="content-p"><b>Text Blob :</b>It internally uses a machine learning algorithm
+                                called Naive Bayes to calculate the polarity of a text. Naive Bayes is a probabilistic
+                                algorithm that uses Bayes' theorem to calculate the probability of a document belonging
+                                to a certain sentiment class (positive, negative, or neutral).</h1>
+                            <h1 class="content-p">TextBlob first tokenizes the input text into words, and then
+                                calculates the polarity score for each word using a pre-trained Naive Bayes classifier.
+                                The individual word polarities are then combined to generate an overall polarity score
+                                for the text.</h1>
+                            <h1 class="content-p">The Naive Bayes classifier used by TextBlob is trained on a large
+                                dataset of labeled data, where each data point is a text document labeled with its
+                                corresponding sentiment polarity. The classifier uses the features (words) present in
+                                the documents to learn how to classify them into different sentiment classes.</h1>
+                            <h1 class="content-p">In summary, TextBlob's polarity calculation is based on a
+                                probabilistic machine learning algorithm that uses a pre-trained Naive Bayes classifier
+                                to calculate the probability of a text belonging to a certain sentiment class.</h1>
+                            <br>
+                            <h1 class="content-p"><b>VADER :</b>(Valence Aware Dictionary and sEntiment Reasoner) uses a
+                                rule-based approach to calculate the polarity of a text. The algorithm is based on a
+                                lexicon that contains a list of words and their associated sentiment scores.</h1>
+
+                            <h1 class="content-p">The VADER lexicon is pre-built and contains over 7,500 lexical
+                                features, including
+                                words, phrases, and emoticons. Each lexical feature is assigned a polarity score ranging
+                                from -1 (negative) to +1 (positive). The scores are based on human raters' judgments and
+                                are averaged over a large sample of texts.</h1>
+
+                            <h1 class="content-p"> calculate the polarity of a text using VADER, the input text is first
+                                tokenized into
+                                words. VADER then checks each word in the text against the lexicon and assigns it a
+                                polarity score. The algorithm also takes into account the context in which each word
+                                appears in the text and the intensity of the sentiment expressed by each word.</h1>
+
+                            <h1 class="content-p">
+                                scoring each word, VADER generates an overall polarity score for the text by
+                                summing the polarity scores of each word and normalizing the result between -1 and +1.
+                                VADER also generates separate scores for positive, negative, and neutral sentiments to
+                                provide more granular information about the sentiment expressed in the text.
+                            </h1>
+                            <h1 class="content-p">In summary, VADER's polarity calculation is based on a rule-based
+                                approach that uses a
+                                pre-built lexicon to assign polarity scores to words and phrases in the text. The
+                                algorithm also takes into account the context and intensity of the sentiment expressed
+                                in the text to generate an overall polarity score.</h1>
+                            <br>
+                            <h1 class="content-p"><b>Flair :</b>It uses a deep learning approach to calculate the
+                                polarity of a text. Specifically, it uses a recurrent neural network (RNN) architecture
+                                called a Long Short-Term Memory (LSTM) network.</h1>
+                            <h1 class="content-p">The training of the Flair model involves first pre-processing the
+                                input text, including tokenization and embedding the tokens into a continuous vector
+                                space. Then, the pre-processed text is fed into the LSTM network, which sequentially
+                                processes each token in the text and generates a representation of the text's overall
+                                sentiment.</h1>
+                            <h1 class="content-p">During the training process, the model learns to identify the
+                                relationships between words and their respective sentiments based on a large corpus of
+                                labeled text data. This enables the model to generalize and accurately predict the
+                                sentiment of new, unseen text.</h1>
+                            <h1 class="content-p">To calculate the polarity of a new text using Flair, the pre-trained
+                                model is loaded and the input text is fed into the LSTM network. The network outputs a
+                                continuous value representing the overall sentiment of the text, which can be
+                                interpreted as positive, negative, or neutral.</h1>
+                            <h1 class="content-p">In summary, Flair's polarity calculation is based on a deep learning
+                                approach that involves training a LSTM neural network on a large corpus of labeled text
+                                data. The model learns to identify relationships between words and sentiments, which
+                                allows it to accurately predict the sentiment of new, unseen text.</h1>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+        <br><br>
+        <div class="thi-lin">
+            <div></div>
+        </div>
+        <br><br><br>
+        <div class="flex-row">
+            <h1 class="dis-inli tebold content-h2">Resources</h1>
+        </div>
+        <div class="div-comp">
+            <div class="comp-box"><img src="{%static 'youtube.jpg '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'geeks.png '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'kaggle.png '  %}" alt=""></div>
+            <div class="comp-box"><img src="{%static 'stake.jpg '  %}" alt=""></div>
+        </div>
+        <br><br>
+    </main>
+    <main class="div-margin-bot">
+        <div class="bcli-white-2">
+            <div>
+                <h1 class="bcorange-2 cwhite1 tehv-pad content-h2">About</h1>
+            </div>
+            <div class="grp-abt">
+                <div class="abt-nam">
+                    <img src="{%static 'charan.jpg'   %}" alt="">
+                    <h1 class="content-h3 tecenter">Ramcharan</h1>
+                    <h1 class="content-p">21U02053</h1>
+                </div>
+                <div class="abt-nam">
+                    <img src="{%static 'sandy.jpg '  %}" alt="">
+                    <h1 class="content-h3 tecenter">Sai Sandeep</h1>
+                    <h1 class="content-p">21U02072</h1>
+                </div>
+        </div>
+    </main>
+
+    <!--<main class="fir-mai">
+        <div class="bcli-white-2">
+            <div>
+                <h1 class="bcorange-2 cwhite1  tehv-pad tecenter content-h2">Map</h1>
+            </div>
+            <div class="div-map">
+            </div>
+        </div>
+    </main>-->
+
+    <script>
+        window.onscroll = function () {
+            var currentScrollPos = window.pageYOffset;
+            if (10 < currentScrollPos) {
+                document.getElementById("nav").style.backgroundColor = "#000000";
+                document.getElementById("nav").style.color = "#ffffff";
+            } else {
+                document.getElementById("nav").style.backgroundColor = "transparent";
+                document.getElementById("nav").style.color = "#000000";
+            }
+        }
+
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        var interval = setInterval(function () {
+            plusSlides(1);
+        }, 6500);
+
+        function clickSlides(n) {
+            showSlides(slideIndex += n);
+            clearInterval(interval);
+            interval = setInterval(function () {
+                plusSlides(1);
+            }, 6500);
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex - 1].style.display = "block";
+        }
+        function n() {
+            var dis = document.getElementsByClassName("opt");
+            var x = document.getElementById("dot2").checked;
+            if (x == true) {
+                dis[0].classList.remove("disnon");
+                dis[0].classList.add("disblo");
+            } else {
+                dis[0].classList.remove("disblo");
+                dis[0].classList.add("disnon");
+            }
+        }
+
+        const p1 = document.getElementById("page1");
+        const p2 = document.getElementById("page2");
+        const tt = document.querySelector(".twitter");
+        const fb = document.querySelector(".facebook");
+        const switchs = document.querySelectorAll(".switch");
+
+        let current = 1;
+        function p1change() {
+            p2.style.display = "none";
+            p1.style.display = "block";
+            fb.style.background = "none";
+            fb.style.color = "#000000";
+            tt.style.color = "#ffffff";
+            tt.style.background = " #00ACEE";
+            switchs[current - 1].classList.remove("active");
+        }
+
+        function p2change() {
+            p1.style.display = "none";
+            p2.style.display = "block";
+            tt.style.background = "none";
+            tt.style.color = "#000000";
+            fb.style.color = "#ffffff";
+            fb.style.background = " #00ACEE";
+            switchs[current - 1].classList.add("active");
+        }
+    </script>
+
+</body>
+
+</html>
